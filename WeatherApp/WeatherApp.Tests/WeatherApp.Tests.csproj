@@ -6,7 +6,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{04987CB5-9A3B-4398-BC0D-B860DD3BE5A1}</ProjectGuid>
+    <ProjectGuid>{46E6D0EF-813F-4963-927C-9BF5529BFB1E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WeatherApp.Tests</RootNamespace>
@@ -93,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WeatherApp\WeatherApp.csproj">
-      <Project>{0F9203A6-AAD3-46C9-8761-FD1370DF3AF5}</Project>
+      <Project>{C6A44C15-8D39-4EED-98FE-CEFC8A9EC3D3}</Project>
       <Name>WeatherApp</Name>
     </ProjectReference>
   </ItemGroup>
