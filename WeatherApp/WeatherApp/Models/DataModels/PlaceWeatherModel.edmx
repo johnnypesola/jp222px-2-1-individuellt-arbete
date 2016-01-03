@@ -136,12 +136,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="WP14_jp222px_1dv409_Individuellt_Arbete_Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Place" EntityType="Self.Place" />
-          <EntitySet Name="Weather" EntityType="Self.Weather" />
+        <EntityContainer Name="PlaceWeatherEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Places" EntityType="Self.Place" />
+          <EntitySet Name="Weathers" EntityType="Self.Weather" />
           <AssociationSet Name="FK_Weather_Place" Association="Self.FK_Weather_Place">
-            <End Role="Place" EntitySet="Place" />
-            <End Role="Weather" EntitySet="Weather" />
+            <End Role="Place" EntitySet="Places" />
+            <End Role="Weather" EntitySet="Weathers" />
           </AssociationSet>
           <FunctionImport Name="usp_PlaceCreate">
             <Parameter Name="Name" Mode="In" Type="String" />
@@ -189,8 +189,8 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PlaceWeatherModelStoreContainer" CdmEntityContainer="WP14_jp222px_1dv409_Individuellt_Arbete_Entities">
-          <EntitySetMapping Name="Place">
+        <EntityContainerMapping StorageEntityContainer="PlaceWeatherModelStoreContainer" CdmEntityContainer="PlaceWeatherEntities">
+          <EntitySetMapping Name="Places">
             <EntityTypeMapping TypeName="PlaceWeatherModel.Place">
               <MappingFragment StoreEntitySet="Place">
                 <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
@@ -199,8 +199,27 @@
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
               </MappingFragment>
             </EntityTypeMapping>
+            <EntityTypeMapping TypeName="PlaceWeatherModel.Place">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="PlaceWeatherModel.Store.usp_PlaceCreate">
+                  <ScalarProperty Name="PlaceId" ParameterName="InsertId" />
+                  <ScalarProperty Name="Latitude" ParameterName="Latitude" />
+                  <ScalarProperty Name="Longitude" ParameterName="Longitude" />
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="PlaceWeatherModel.Store.usp_PlaceUpdate">
+                  <ScalarProperty Name="Latitude" ParameterName="Latitude" Version="Current" />
+                  <ScalarProperty Name="Longitude" ParameterName="Longitude" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="Name" Version="Current" />
+                  <ScalarProperty Name="PlaceId" ParameterName="PlaceId" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="PlaceWeatherModel.Store.usp_PlaceDelete">
+                  <ScalarProperty Name="PlaceId" ParameterName="PlaceId" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Weather">
+          <EntitySetMapping Name="Weathers">
             <EntityTypeMapping TypeName="PlaceWeatherModel.Weather">
               <MappingFragment StoreEntitySet="Weather">
                 <ScalarProperty Name="WeatherId" ColumnName="WeatherId" />
@@ -236,7 +255,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

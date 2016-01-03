@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WeatherApp.Models
+namespace WeatherApp.Models.DataModels
 {
     using System;
     using System.Data.Entity;
@@ -15,10 +15,10 @@ namespace WeatherApp.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class WP14_jp222px_1dv409_Individuellt_Arbete_Entities : DbContext
+    public partial class PlaceWeatherEntities : DbContext
     {
-        public WP14_jp222px_1dv409_Individuellt_Arbete_Entities()
-            : base("name=WP14_jp222px_1dv409_Individuellt_Arbete_Entities")
+        public PlaceWeatherEntities()
+            : base("name=PlaceWeatherEntities")
         {
         }
     
@@ -27,8 +27,8 @@ namespace WeatherApp.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Place> Place { get; set; }
-        public virtual DbSet<Weather> Weather { get; set; }
+        public virtual DbSet<Place> Places { get; set; }
+        public virtual DbSet<Weather> Weathers { get; set; }
     
         public virtual int usp_PlaceCreate(string name, Nullable<decimal> longitude, Nullable<decimal> latitude, ObjectParameter insertId)
         {
