@@ -10,7 +10,7 @@ namespace WeatherApp.Models
     [MetadataType(typeof(Place_Metadata))]
     public partial class Place
     {
-        internal sealed class Contact_Metadata
+        internal sealed class Place_Metadata
         {
             public int PlaceId;
 
@@ -19,12 +19,6 @@ namespace WeatherApp.Models
             [MaxLength(50, ErrorMessage = "Namnet får max bestå av 50 tecken")]
             [RegularExpression(ValidationExtensions.TEXT_FIELD_REGEXP, ErrorMessage = "Namnet innehåller otillåtna tecken.")]
             public string Name;
-
-            [Display(Name = "Efternamn")]
-            [Required(ErrorMessage = "Var god ange ett efternamn.")]
-            [MaxLength(50, ErrorMessage = "Efternamnet får max bestå av 50 tecken")]
-            [RegularExpression(ValidationExtensions.TEXT_FIELD_REGEXP, ErrorMessage = "Efternamnet innehåller otillåtna tecken.")]
-            public string LastName;
 
             [DisplayFormat(ConvertEmptyStringToNull = false)]
             [Required(ErrorMessage = "Var god ange ett GPS longitud värde.")]
@@ -35,12 +29,6 @@ namespace WeatherApp.Models
             [Required(ErrorMessage = "Var god ange ett GPS latitud värde.")]
             [Range(-86, 86, ErrorMessage = "Värdet för latitud får max vara 86 och minst -86.")]
             public decimal Latitude { get; set; }
-
-            [Display(Name = "E-post")]
-            [Required(ErrorMessage = "Var god ange en e-postadress.")]
-            [EmailAddress(ErrorMessage = "Var god ange en giltig e-postadress")]
-            [MaxLength(50, ErrorMessage = "Adressen får max bestå av 50 tecken")]
-            public string EmailAddress;
         }
     }
 }
