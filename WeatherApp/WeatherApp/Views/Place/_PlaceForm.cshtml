@@ -1,0 +1,40 @@
+﻿@model WeatherApp.Models.Place
+
+<div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <h2>@ViewBag.Title</h2>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.PlaceId)
+
+        <div>
+            @Html.LabelFor(model => model.Name)
+            <div>
+                @Html.EditorFor(model => model.Name, new { maxlength = "50", size = "50" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "validation-message" })
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Longitude)
+            <div>
+                @Html.EditorFor(model => model.Longitude, new { maxlength = "50", size = "50" })
+                @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "validation-message" })
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Latitude)
+            <div>
+                @Html.EditorFor(model => model.Latitude, new { maxlength = "50", size = "50" })
+                @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "validation-message" })
+            </div>
+        </div>
+        <br />
+        <input type="submit" value="Spara" class="button" /> @Html.ActionLink("Tillbaka till listan", "Index", null, new { @class = "button" })
+    }
+</div>

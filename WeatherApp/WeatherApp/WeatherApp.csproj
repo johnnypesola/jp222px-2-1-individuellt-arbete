@@ -131,6 +131,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Extensions\DecimalModelBinder.cs" />
     <Compile Include="App_Extensions\ValidationExtensions.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -221,6 +222,13 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Place\Index.cshtml" />
+    <Content Include="Views\Shared\_FlashMessage.cshtml" />
+    <Content Include="Views\Place\Create.cshtml" />
+    <Content Include="Views\Place\_PlaceForm.cshtml" />
+    <Content Include="Views\Place\Edit.cshtml" />
+    <Content Include="Views\Place\Success.cshtml" />
+    <Content Include="Views\Place\Delete.cshtml" />
+    <Content Include="Scripts\jquery.validate.fixes.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

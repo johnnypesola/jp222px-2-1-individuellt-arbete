@@ -13,6 +13,12 @@ namespace WeatherApp
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+
+            // Bind custom decimal model. The default one is too strict for using , or .
+            ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
+            ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
+
+            UnityConfig.RegisterComponents();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

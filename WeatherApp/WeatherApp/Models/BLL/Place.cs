@@ -19,12 +19,14 @@ namespace WeatherApp.Models
             [RegularExpression(ValidationExtensions.TEXT_FIELD_REGEXP, ErrorMessage = "Namnet innehåller otillåtna tecken.")]
             public string Name;
 
-            [DisplayFormat(ConvertEmptyStringToNull = false)]
+            [Display(Name = "Latitud")]
+            [DisplayFormat(ConvertEmptyStringToNull = false, DataFormatString = "{0:n15}", ApplyFormatInEditMode = true)]
             [Required(ErrorMessage = "Var god ange ett GPS longitud värde.")]
             [Range(-180, 180, ErrorMessage = "Värdet för longitud får max vara 180 och minst -180.")]
             public decimal Longitude { get; set; }
 
-            [DisplayFormat(ConvertEmptyStringToNull = false)]
+            [Display(Name = "Longitud")]
+            [DisplayFormat(ConvertEmptyStringToNull = false, DataFormatString = "{0:n15}", ApplyFormatInEditMode = true)]
             [Required(ErrorMessage = "Var god ange ett GPS latitud värde.")]
             [Range(-86, 86, ErrorMessage = "Värdet för latitud får max vara 86 och minst -86.")]
             public decimal Latitude { get; set; }

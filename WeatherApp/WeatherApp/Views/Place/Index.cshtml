@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<WeatherApp.Models.Place>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Platser";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Skapa ny plats", "Create")
 </p>
 <table class="table">
     <tr>
@@ -35,9 +35,8 @@
             @Html.DisplayFor(modelItem => item.Longitude)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PlaceId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PlaceId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PlaceId })
+            @Html.ActionLink("Redigera", "Edit", new { id=item.PlaceId }) |
+            @Html.ActionLink("Radera", "Delete", new { id=item.PlaceId })
         </td>
     </tr>
 }

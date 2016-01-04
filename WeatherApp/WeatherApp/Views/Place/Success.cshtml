@@ -1,0 +1,9 @@
+﻿@model WeatherApp.Models.Place
+
+    <div>
+        <h3>
+            Platsen <b>@Model.Name</b> @ViewBag.ActionName med ett lyckat resultat
+        </h3>
+
+        @Html.ActionLink("Tillbaka till listan", "Index", null, new { @class = "button" })
+    </div>
