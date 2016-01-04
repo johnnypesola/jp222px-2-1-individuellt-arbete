@@ -6,7 +6,6 @@ using System.Web;
 
 namespace WeatherApp.Models
 {
-
     [MetadataType(typeof(Place_Metadata))]
     public partial class Place
     {

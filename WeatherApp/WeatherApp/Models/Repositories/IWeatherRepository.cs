@@ -8,15 +8,15 @@ namespace WeatherApp.Models
 {
     public interface IWeatherRepository : IDisposable
     {
-        IEnumerable<Place> GetAll();
+        IEnumerable<Weather> GetAll();
 
-        Place Get(int placeId);
+        Weather Get(int weatherId);
 
-        void Insert(Place place);
+        void Insert(Weather weather);
 
-        void Update(Place place);
+        void Update(Weather weather);
 
-        void Delete(Place place);
+        void Delete(Weather weather);
 
         void Save();
     }

@@ -6,17 +6,18 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WeatherApp;
 using WeatherApp.Controllers;
+using WeatherApp.Models;
 
 namespace WeatherApp.Tests.Controllers
 {
     [TestClass]
-    public class HomeControllerTest
+    public class PlaceControllerTest
     {
         [TestMethod]
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            PlaceController controller = new PlaceController(new PlaceRepository());
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -24,12 +25,12 @@ namespace WeatherApp.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
-
+        /*
         [TestMethod]
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            PlaceController controller = new PlaceController(new PlaceRepository());
 
             // Act
             ViewResult result = controller.About() as ViewResult;
@@ -42,7 +43,7 @@ namespace WeatherApp.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            PlaceController controller = new PlaceController();
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;
@@ -50,5 +51,6 @@ namespace WeatherApp.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
+         */ 
     }
 }

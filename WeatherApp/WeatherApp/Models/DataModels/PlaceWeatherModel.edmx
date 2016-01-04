@@ -201,11 +201,11 @@
             </EntityTypeMapping>
             <EntityTypeMapping TypeName="PlaceWeatherModel.Place">
               <ModificationFunctionMapping>
-                <InsertFunction FunctionName="PlaceWeatherModel.Store.usp_PlaceCreate">
-                  <ScalarProperty Name="PlaceId" ParameterName="InsertId" />
+                <InsertFunction FunctionName="PlaceWeatherModel.Store.usp_PlaceCreate" RowsAffectedParameter="InsertId">
                   <ScalarProperty Name="Latitude" ParameterName="Latitude" />
                   <ScalarProperty Name="Longitude" ParameterName="Longitude" />
                   <ScalarProperty Name="Name" ParameterName="Name" />
+                  <ResultBinding Name="PlaceId" ColumnName="InsertId" />
                 </InsertFunction>
                 <UpdateFunction FunctionName="PlaceWeatherModel.Store.usp_PlaceUpdate">
                   <ScalarProperty Name="Latitude" ParameterName="Latitude" Version="Current" />
@@ -233,6 +233,22 @@
                 <ScalarProperty Name="TotalCloudCover" ColumnName="TotalCloudCover" />
                 <ScalarProperty Name="ThunderStormProbability" ColumnName="ThunderStormProbability" />
               </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="PlaceWeatherModel.Weather">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="PlaceWeatherModel.Store.usp_WeatherCreate" RowsAffectedParameter="InsertId">
+                  <ScalarProperty Name="ThunderStormProbability" ParameterName="ThunderStormProbability" />
+                  <ScalarProperty Name="TotalCloudCover" ParameterName="TotalCloudCover" />
+                  <ScalarProperty Name="Precipitation" ParameterName="Precipitation" />
+                  <ScalarProperty Name="Humidity" ParameterName="Humidity" />
+                  <ScalarProperty Name="WindSpeed" ParameterName="WindSpeed" />
+                  <ScalarProperty Name="WindDirection" ParameterName="WindDirection" />
+                  <ScalarProperty Name="Temperature" ParameterName="Temperature" />
+                  <ScalarProperty Name="DateTime" ParameterName="DateTime" />
+                  <ScalarProperty Name="PlaceId" ParameterName="PlaceId" />
+                  <ResultBinding Name="WeatherId" ColumnName="InsertId" />
+                </InsertFunction>
+              </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="usp_PlaceCreate" FunctionName="PlaceWeatherModel.Store.usp_PlaceCreate" />

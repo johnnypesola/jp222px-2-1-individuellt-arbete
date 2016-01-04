@@ -16,7 +16,7 @@ namespace WeatherApp
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Place", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
