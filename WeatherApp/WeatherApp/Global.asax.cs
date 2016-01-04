@@ -18,6 +18,11 @@ namespace WeatherApp
             ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
             ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
 
+            // Register custom error messages for validation of standard data types
+            ClientDataTypeModelValidatorProvider.ResourceClassKey = "Messages";
+            DefaultModelBinder.ResourceClassKey = "Messages";
+
+            // Other registrations
             UnityConfig.RegisterComponents();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
