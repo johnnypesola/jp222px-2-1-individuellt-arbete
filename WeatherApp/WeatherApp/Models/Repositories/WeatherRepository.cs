@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using WeatherApp.Models.DataModels;
+using WeatherApp.Models.WebServices;
 
 namespace WeatherApp.Models
 {
@@ -12,6 +13,13 @@ namespace WeatherApp.Models
         // Fields
         private readonly PlaceWeatherEntities _entities = new PlaceWeatherEntities();
         bool isDisposed = false; // Flag: Has Dispose already been called?
+        private ISmhiWebService _webservice;
+
+        // Constructor for injecting repositories and services (makes testing easier). Handled in unityconfig
+        public WeatherRepository(ISmhiWebService webservice)
+        {
+            _webservice = webservice;
+        }
 
         // Public Methods
         public IEnumerable<Weather> GetAll()

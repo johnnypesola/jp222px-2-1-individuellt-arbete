@@ -1,0 +1,26 @@
+﻿@model IEnumerable<WeatherApp.Models.Weather>
+
+@{
+    ViewBag.Title = "Get";
+}
+
+<h2>@ViewBag.PlaceName</h2>
+
+<table>
+    <tr>
+        <th>Tid</th>
+        <th>Luftfuktighet</th>
+        <th>Vädertyp</th>
+        <th>Temperatur</th>
+        <th>Chans för åska</th>
+        <th>Molnighet</th>
+        <th>Vindriktning</th>
+        <th>Vindstyrka</th>
+        <th></th>
+    </tr>
+
+    @Html.DisplayFor(m => m)
+
+</table>
+    
+

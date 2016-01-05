@@ -23,7 +23,9 @@ namespace WeatherApp.Controllers
         {
             try
             {
-                return View(_repository.GetAll());
+                IEnumerable<Place> places = _repository.GetAll();
+
+                return View(places);
             }
             catch (Exception)
             {

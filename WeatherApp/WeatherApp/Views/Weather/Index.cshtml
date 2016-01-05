@@ -1,0 +1,13 @@
+﻿@model IEnumerable<WeatherApp.Models.Weather>
+
+@{
+    ViewBag.Title = "Väder";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+
+    @Html.DisplayFor(m => m, "Weather")
+
+</table>

@@ -1,0 +1,32 @@
+﻿@model WeatherApp.Models.Weather
+
+<tr>
+    <td>
+        @Model.DateTime
+    </td>
+    <td>
+        @Model.Humidity
+    </td>
+    <td>
+        @Model.Precipitation
+    </td>
+    <td>
+        @Model.Temperature
+    </td>
+    <td>
+        @Model.ThunderStormProbability
+    </td>
+    <td>
+        @Model.TotalCloudCover
+    </td>
+    <td>
+        @Model.WindDirection
+    </td>
+    <td>
+        @Model.WindSpeed
+    </td>
+    <td>
+        @Html.ActionLink("Radera", "Delete", new { id = Model.WeatherId })
+    </td>
+</tr>
+

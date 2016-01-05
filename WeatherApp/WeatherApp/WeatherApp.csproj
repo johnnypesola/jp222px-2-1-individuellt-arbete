@@ -58,6 +58,10 @@
     <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -126,11 +130,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="App_Extensions\DecimalModelBinder.cs" />
     <Compile Include="App_Extensions\ValidationExtensions.cs" />
     <Compile Include="App_GlobalResources\Messages.Designer.cs">
@@ -143,6 +142,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\PlaceController.cs" />
+    <Compile Include="Controllers\WeatherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -173,6 +173,8 @@
     <Compile Include="Models\Repositories\IWeatherRepository.cs" />
     <Compile Include="Models\Repositories\PlaceRepository.cs" />
     <Compile Include="Models\Repositories\WeatherRepository.cs" />
+    <Compile Include="Models\WebServices\ISmhiWebService.cs" />
+    <Compile Include="Models\WebServices\SmhiWebService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +204,7 @@
       <LastGenOutput>PlaceWeatherModel.cs</LastGenOutput>
       <CustomToolNamespace>WeatherApp.Models</CustomToolNamespace>
     </Content>
+    <Content Include="App_Data\smhi_response.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -234,10 +237,11 @@
     <Content Include="Views\Place\Success.cshtml" />
     <Content Include="Views\Place\Delete.cshtml" />
     <Content Include="Scripts\jquery.validate.fixes.js" />
+    <Content Include="Views\Weather\Index.cshtml" />
+    <Content Include="Views\Weather\Get.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Weather.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
