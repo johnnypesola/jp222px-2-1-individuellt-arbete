@@ -11,20 +11,14 @@ namespace WeatherApp.Controllers
     public class WeatherController : Controller
     {
         // Fields
-        private ISmhiWebService _webservice;
-        private IPlaceRepository _placeRepository;
-        private IWeatherRepository _weatherRepository;
+        private readonly IPlaceWeatherService _weatherService;
 
         // Constructor for injecting repositories and services (makes testing easier). Handled in unityconfig
         public WeatherController(
-            ISmhiWebService webservice,
-            IPlaceRepository placeRepository,
-            IWeatherRepository weatherRepository
+            IPlaceWeatherService weatherService
         )
         {
-            _webservice = webservice;
-            _placeRepository = placeRepository;
-            _weatherRepository = weatherRepository;
+            _weatherService = weatherService;
         }
 
         // GET: Weather
@@ -36,17 +30,13 @@ namespace WeatherApp.Controllers
         public ActionResult Get(int placeId)
         {
             // Declare vars
-            Place place;
             IEnumerable<Weather> weatherForPlace;
 
-            // Get place
-            place = _placeRepository.Get(placeId);
-
             // Set place info
-            ViewBag.PlaceName = place.Name;
+            ViewBag.PlaceName = "Some place";
 
             // Get weather for place
-            weatherForPlace = _webservice.GetWeatherForPlace(place).AsEnumerable();
+            weatherForPlace = _weatherService.GetWeatherForPlace(placeId);
 
             return View(weatherForPlace);
         }

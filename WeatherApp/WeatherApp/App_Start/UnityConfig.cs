@@ -16,9 +16,9 @@ namespace WeatherApp
             // it is NOT necessary to register your controllers
             
             // Automatically Adds dependency injection to all IContactRepository with ContactRepository and also other intefaces
-            container.RegisterType<IPlaceRepository, PlaceRepository>();
-            container.RegisterType<IWeatherRepository, WeatherRepository>();
+            container.RegisterType<IPlaceWeatherRepository, PlaceWeatherRepository>();
             container.RegisterType<ISmhiWebService, SmhiWebService>();
+            container.RegisterType<IPlaceWeatherService, PlaceWeatherService>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

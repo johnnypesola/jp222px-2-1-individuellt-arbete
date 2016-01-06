@@ -17,7 +17,7 @@ namespace WeatherApp.Models
 
             [Display(Name = "Datum")]
             [Required(ErrorMessage = "Var god ange ett Datum.")]
-            public System.DateTime DateTime;
+            public System.DateTime DateTime { get; set; }
 
             [Display(Name = "Temperatur")]
             [DisplayFormat(ConvertEmptyStringToNull = false)]
@@ -60,6 +60,12 @@ namespace WeatherApp.Models
             [Required(ErrorMessage = "Var god ange Sannolikhet för åska.")]
             [Range(0, 100, ErrorMessage = "Värdet för Molnmängd får max vara 100 och minst 0.")]
             public byte ThunderStormProbability { get; set; }
+        }
+
+        // To offer data annotation validation in service layer
+        public bool IsValid(ref Dictionary<string, string> errors)
+        {
+            return this.IsDataAnnotationValid<Weather, Weather_Metadata>(ref errors);
         }
     }
 }

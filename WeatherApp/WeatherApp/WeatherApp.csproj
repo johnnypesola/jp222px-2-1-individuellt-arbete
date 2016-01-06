@@ -169,10 +169,11 @@
     <Compile Include="Models\DataModels\Weather.cs">
       <DependentUpon>PlaceWeatherModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Repositories\IPlaceRepository.cs" />
-    <Compile Include="Models\Repositories\IWeatherRepository.cs" />
-    <Compile Include="Models\Repositories\PlaceRepository.cs" />
-    <Compile Include="Models\Repositories\WeatherRepository.cs" />
+    <Compile Include="Models\IPlaceWeatherService.cs" />
+    <Compile Include="Models\Repositories\BaseRepository.cs" />
+    <Compile Include="Models\Repositories\IPlaceWeatherRepository.cs" />
+    <Compile Include="Models\Repositories\PlaceWeatherRepository.cs" />
+    <Compile Include="Models\PlaceWeatherService.cs" />
     <Compile Include="Models\WebServices\ISmhiWebService.cs" />
     <Compile Include="Models\WebServices\SmhiWebService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

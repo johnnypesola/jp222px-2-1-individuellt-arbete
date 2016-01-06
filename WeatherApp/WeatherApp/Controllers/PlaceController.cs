@@ -11,10 +11,10 @@ namespace WeatherApp.Controllers
     public class PlaceController : Controller
     {
         // Fields
-        private IPlaceRepository _repository;
+        private readonly IPlaceWeatherRepository _repository;
 
         // Constructor for injecting repository (makes testing easier)
-        public PlaceController(IPlaceRepository repository)
+        public PlaceController(IPlaceWeatherRepository repository)
         {
             _repository = repository;
         }
@@ -23,7 +23,7 @@ namespace WeatherApp.Controllers
         {
             try
             {
-                IEnumerable<Place> places = _repository.GetAll();
+                IEnumerable<Place> places = _repository.GetAllPlaces();
 
                 return View(places);
             }
@@ -54,7 +54,7 @@ namespace WeatherApp.Controllers
                 try
                 {
                     // Save contact
-                    _repository.Insert(place);
+                    _repository.InsertPlace(place);
                     _repository.Save();
 
                     ViewBag.Title = "Plats skapad";
@@ -86,7 +86,7 @@ namespace WeatherApp.Controllers
             // Valid request
             else
             {
-                Place place = _repository.Get((int)id);
+                Place place = _repository.GetPlace((int)id);
 
                 // If contact does not exist
                 if (place == null)
@@ -105,7 +105,7 @@ namespace WeatherApp.Controllers
             ViewBag.Title = "Radera plats";
 
             // We need the place information, it's displayed in the Success view.
-            Place place = _repository.Get(id);
+            Place place = _repository.GetPlace(id);
 
             // If place does not exist
             if (place == null)
@@ -118,7 +118,7 @@ namespace WeatherApp.Controllers
                 try
                 {
                     // Delete place
-                    _repository.Delete(place);
+                    _repository.DeletePlace(place);
                     _repository.Save();
 
                     // Set session variable that only survives one roundtrip
@@ -151,7 +151,7 @@ namespace WeatherApp.Controllers
                 try
                 {
                     // Get place
-                    Place place = _repository.Get((int)id);
+                    Place place = _repository.GetPlace((int)id);
 
                     // If no place was found
                     if (place == null)
@@ -180,7 +180,7 @@ namespace WeatherApp.Controllers
             try
             {
                 // Fetch place
-                Place place = _repository.Get(id);
+                Place place = _repository.GetPlace(id);
 
                 // If no contact exists
                 if (place == null)
@@ -191,7 +191,7 @@ namespace WeatherApp.Controllers
                 if (TryUpdateModel(place, String.Empty, new string[] { "Name", "Longitude", "Latitude" }))
                 {
                     // Save contact
-                    _repository.Update(place);
+                    _repository.UpdatePlace(place);
                     _repository.Save();
 
                     ViewBag.Title = "Plats redigerad";

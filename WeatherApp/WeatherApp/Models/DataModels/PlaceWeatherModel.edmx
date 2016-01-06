@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PlaceWeatherModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PlaceWeatherModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Place">
           <Key>
             <PropertyRef Name="PlaceId" />
@@ -78,10 +78,25 @@
           <Parameter Name="ThunderStormProbability" Type="tinyint" Mode="In" />
           <Parameter Name="InsertId" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="usp_WeatherDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="appSchema">
+          <Parameter Name="WeatherId" Type="int" Mode="In" />
+        </Function>
         <Function Name="usp_WeatherGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="appSchema">
           <Parameter Name="PlaceId" Type="int" Mode="In" />
           <Parameter Name="Name" Type="varchar" Mode="In" />
           <Parameter Name="DateTime" Type="datetime2" Mode="In" />
+        </Function>
+        <Function Name="usp_WeatherUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="appSchema">
+          <Parameter Name="WeatherId" Type="int" Mode="In" />
+          <Parameter Name="PlaceId" Type="int" Mode="In" />
+          <Parameter Name="DateTime" Type="datetime2" Mode="In" />
+          <Parameter Name="Temperature" Type="decimal" Mode="In" />
+          <Parameter Name="WindDirection" Type="int" Mode="In" />
+          <Parameter Name="WindSpeed" Type="decimal" Mode="In" />
+          <Parameter Name="Humidity" Type="tinyint" Mode="In" />
+          <Parameter Name="Precipitation" Type="tinyint" Mode="In" />
+          <Parameter Name="TotalCloudCover" Type="tinyint" Mode="In" />
+          <Parameter Name="ThunderStormProbability" Type="tinyint" Mode="In" />
         </Function>
         <EntityContainer Name="PlaceWeatherModelStoreContainer">
           <EntitySet Name="Place" EntityType="Self.Place" Schema="appSchema" store:Type="Tables" />
@@ -91,8 +106,7 @@
             <End Role="Weather" EntitySet="Weather" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PlaceWeatherModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -150,7 +164,7 @@
             <Parameter Name="InsertId" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PlaceDelete">
-            <Parameter Name="PlaceId" Mode="In" Type="Int32" />
+          <Parameter Name="PlaceId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_PlaceList">
             <Parameter Name="PlaceId" Mode="In" Type="Int32" />
@@ -182,6 +196,21 @@
             <Parameter Name="PlaceId" Mode="In" Type="Int32" />
             <Parameter Name="Name" Mode="In" Type="String" />
             <Parameter Name="DateTime" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="usp_WeatherDelete">
+          <Parameter Name="WeatherId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_WeatherUpdate">
+            <Parameter Name="WeatherId" Mode="In" Type="Int32" />
+            <Parameter Name="PlaceId" Mode="In" Type="Int32" />
+            <Parameter Name="DateTime" Mode="In" Type="DateTime" />
+            <Parameter Name="Temperature" Mode="In" Type="Decimal" />
+            <Parameter Name="WindDirection" Mode="In" Type="Int32" />
+            <Parameter Name="WindSpeed" Mode="In" Type="Decimal" />
+            <Parameter Name="Humidity" Mode="In" Type="Byte" />
+            <Parameter Name="Precipitation" Mode="In" Type="Byte" />
+            <Parameter Name="TotalCloudCover" Mode="In" Type="Byte" />
+            <Parameter Name="ThunderStormProbability" Mode="In" Type="Byte" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -248,6 +277,21 @@
                   <ScalarProperty Name="PlaceId" ParameterName="PlaceId" />
                   <ResultBinding Name="WeatherId" ColumnName="InsertId" />
                 </InsertFunction>
+                <DeleteFunction FunctionName="PlaceWeatherModel.Store.usp_WeatherDelete">
+                  <ScalarProperty Name="WeatherId" ParameterName="WeatherId" />
+                </DeleteFunction>
+                <UpdateFunction FunctionName="PlaceWeatherModel.Store.usp_WeatherUpdate">
+                  <ScalarProperty Name="ThunderStormProbability" ParameterName="ThunderStormProbability" Version="Current" />
+                  <ScalarProperty Name="TotalCloudCover" ParameterName="TotalCloudCover" Version="Current" />
+                  <ScalarProperty Name="Precipitation" ParameterName="Precipitation" Version="Current" />
+                  <ScalarProperty Name="Humidity" ParameterName="Humidity" Version="Current" />
+                  <ScalarProperty Name="WindSpeed" ParameterName="WindSpeed" Version="Current" />
+                  <ScalarProperty Name="WindDirection" ParameterName="WindDirection" Version="Current" />
+                  <ScalarProperty Name="Temperature" ParameterName="Temperature" Version="Current" />
+                  <ScalarProperty Name="DateTime" ParameterName="DateTime" Version="Current" />
+                  <ScalarProperty Name="PlaceId" ParameterName="PlaceId" Version="Current" />
+                  <ScalarProperty Name="WeatherId" ParameterName="WeatherId" Version="Current" />
+                </UpdateFunction>
               </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -257,6 +301,8 @@
           <FunctionImportMapping FunctionImportName="usp_PlaceUpdate" FunctionName="PlaceWeatherModel.Store.usp_PlaceUpdate" />
           <FunctionImportMapping FunctionImportName="usp_WeatherCreate" FunctionName="PlaceWeatherModel.Store.usp_WeatherCreate" />
           <FunctionImportMapping FunctionImportName="usp_WeatherGet" FunctionName="PlaceWeatherModel.Store.usp_WeatherGet" />
+          <FunctionImportMapping FunctionImportName="usp_WeatherDelete" FunctionName="PlaceWeatherModel.Store.usp_WeatherDelete" />
+          <FunctionImportMapping FunctionImportName="usp_WeatherUpdate" FunctionName="PlaceWeatherModel.Store.usp_WeatherUpdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

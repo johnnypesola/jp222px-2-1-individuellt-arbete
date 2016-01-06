@@ -159,5 +159,59 @@ namespace WeatherApp.Models.DataModels
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_WeatherGet", placeIdParameter, nameParameter, dateTimeParameter);
         }
+    
+        public virtual int usp_WeatherDelete(Nullable<int> weatherId)
+        {
+            var weatherIdParameter = weatherId.HasValue ?
+                new ObjectParameter("WeatherId", weatherId) :
+                new ObjectParameter("WeatherId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_WeatherDelete", weatherIdParameter);
+        }
+    
+        public virtual int usp_WeatherUpdate(Nullable<int> weatherId, Nullable<int> placeId, Nullable<System.DateTime> dateTime, Nullable<decimal> temperature, Nullable<int> windDirection, Nullable<decimal> windSpeed, Nullable<byte> humidity, Nullable<byte> precipitation, Nullable<byte> totalCloudCover, Nullable<byte> thunderStormProbability)
+        {
+            var weatherIdParameter = weatherId.HasValue ?
+                new ObjectParameter("WeatherId", weatherId) :
+                new ObjectParameter("WeatherId", typeof(int));
+    
+            var placeIdParameter = placeId.HasValue ?
+                new ObjectParameter("PlaceId", placeId) :
+                new ObjectParameter("PlaceId", typeof(int));
+    
+            var dateTimeParameter = dateTime.HasValue ?
+                new ObjectParameter("DateTime", dateTime) :
+                new ObjectParameter("DateTime", typeof(System.DateTime));
+    
+            var temperatureParameter = temperature.HasValue ?
+                new ObjectParameter("Temperature", temperature) :
+                new ObjectParameter("Temperature", typeof(decimal));
+    
+            var windDirectionParameter = windDirection.HasValue ?
+                new ObjectParameter("WindDirection", windDirection) :
+                new ObjectParameter("WindDirection", typeof(int));
+    
+            var windSpeedParameter = windSpeed.HasValue ?
+                new ObjectParameter("WindSpeed", windSpeed) :
+                new ObjectParameter("WindSpeed", typeof(decimal));
+    
+            var humidityParameter = humidity.HasValue ?
+                new ObjectParameter("Humidity", humidity) :
+                new ObjectParameter("Humidity", typeof(byte));
+    
+            var precipitationParameter = precipitation.HasValue ?
+                new ObjectParameter("Precipitation", precipitation) :
+                new ObjectParameter("Precipitation", typeof(byte));
+    
+            var totalCloudCoverParameter = totalCloudCover.HasValue ?
+                new ObjectParameter("TotalCloudCover", totalCloudCover) :
+                new ObjectParameter("TotalCloudCover", typeof(byte));
+    
+            var thunderStormProbabilityParameter = thunderStormProbability.HasValue ?
+                new ObjectParameter("ThunderStormProbability", thunderStormProbability) :
+                new ObjectParameter("ThunderStormProbability", typeof(byte));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_WeatherUpdate", weatherIdParameter, placeIdParameter, dateTimeParameter, temperatureParameter, windDirectionParameter, windSpeedParameter, humidityParameter, precipitationParameter, totalCloudCoverParameter, thunderStormProbabilityParameter);
+        }
     }
 }

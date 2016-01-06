@@ -6,6 +6,7 @@ using System.Web;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Net;
+using System.ComponentModel.DataAnnotations;
 
 namespace WeatherApp.Models.WebServices
 {
@@ -13,7 +14,7 @@ namespace WeatherApp.Models.WebServices
     {
         public IEnumerable<Weather> GetWeatherForPlace(Place place)
         {
-            List<Weather> WeathersForPlace = new List<Weather>(20);
+            List<Weather> WeathersForPlace = new List<Weather>(70);
             string rawJson;
             string uriString = String.Format("http://opendata-download-metfcst.smhi.se/api/category/pmp1.5g/version/1/geopoint/lat/{0}/lon/{1}/data.json", place.UrlFriendlyLatitude , place.UrlFriendlyLongitude);
 
@@ -41,23 +42,28 @@ namespace WeatherApp.Models.WebServices
 
             foreach (var weatherData in parsedObj.timeseries)
             {
+                // Create new weather object
+                Weather weatherObj = new Weather
+                {
+                    PlaceId = place.PlaceId,
+                    DateTime = (DateTime)weatherData["validTime"],
+                    Temperature = (Decimal)weatherData["t"],
+                    WindDirection = (Int32)weatherData["wd"],
+                    WindSpeed = (Decimal)weatherData["ws"],
+                    Humidity = (Byte)weatherData["r"],
+                    Precipitation = (Byte)weatherData["pcat"],
+                    TotalCloudCover = (Byte)weatherData["tcc"],
+                    ThunderStormProbability = (Byte)weatherData["tstm"]
+                };
 
-                // Create and add weather to list
-                WeathersForPlace.Add(
-                    new Weather
-                    {
-                        PlaceId = place.PlaceId,
-                        DateTime = (DateTime)weatherData["validTime"],
-                        Temperature = (Decimal)weatherData["t"],
-                        WindDirection = (Int32)weatherData["wd"],
-                        WindSpeed = (Decimal)weatherData["ws"],
-                        Humidity = (Byte)weatherData["r"],
-                        Precipitation = (Byte)weatherData["pcat"],
-                        TotalCloudCover = (Byte)weatherData["tcc"],
-                        ThunderStormProbability = (Byte)weatherData["tstm"]
-                    }
-                );
+                // Check if object is valid
+                var validationErrors = new Dictionary<string, string>();
 
+                if (weatherObj.IsValid(ref validationErrors))
+                {
+                    // Create and add weather to list
+                    WeathersForPlace.Add(weatherObj);
+                }
             }
 
             return WeathersForPlace.AsEnumerable();
