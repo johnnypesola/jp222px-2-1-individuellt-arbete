@@ -1,29 +1,54 @@
 ﻿@model WeatherApp.Models.DayForecast
 
-<tr>
-    <td>
-        @Model.StartDateTime
-    </td>
-    <td>
-        @Model.GetDayWeather().Humidity
-    </td>
-    <td>
-        @Model.GetDayWeather().Precipitation
-    </td>
-    <td>
-        @Model.GetDayWeather().Temperature
-    </td>
-    <td>
-        @Model.GetDayWeather().ThunderStormProbability
-    </td>
-    <td>
-        @Model.GetDayWeather().TotalCloudCover
-    </td>
-    <td>
-        @Model.GetDayWeather().WindDirection
-    </td>
-    <td>
-        @Model.GetDayWeather().WindSpeed
-    </td>
-</tr>
+<div class="col-md-2 dayforecast-container">
+    <h4>
+        @Model.DayName <small>@Model.StartDateTime.Value.ToString("yyyy-MM-dd")</small>
+    </h4>
+    
+    <img class="cloud" src="~/Content/img/cloud@(Model.GetDayWeather().TotalCloudCover).png">
+    <img class="precipitation" src="~/Content/img/precipitation@(Model.GetDayWeather().Precipitation).png">
+    
+    <div class="temperature">
+        @String.Format("{0:0.00}", Model.GetDayWeather().Temperature) °
+    </div>
+    <div class="wind-direction">
+        @{int windDir = @Model.GetDayWeather().WindDirection;}
+        @if (windDir > 337 || windDir <= 22)
+        {
+            <span>↑</span>
+        }
+        @if (windDir > 22 && windDir <= 67)
+        {
+            <span>↗</span>
+        }
+        @if (windDir > 67 && windDir <= 112)
+        {
+            <span>→</span>
+        }
+        @if (windDir > 112 && windDir <= 157)
+        {
+            <span>↘</span>
+        }
+        @if (windDir > 157 && windDir <= 202)
+        {
+            <span>↓</span>
+        }
+        @if (windDir > 202 && windDir <= 247)
+        {
+            <span>↙</span>
+        }
+        @if (windDir > 247 && windDir <= 292)
+        {
+            <span>←</span>
+        }
+        @if (windDir > 292 && windDir <= 337)
+        {
+            <span>↖</span>
+        }
+    </div>
+    <div class="wind-speed">
+        @String.Format("{0:0.00}", Model.GetDayWeather().WindSpeed) m/s
+    </div>
+</div>
+<!-- @Model.GetDayWeather().Humidity % @Model.GetDayWeather().ThunderStormProbability % -->
 

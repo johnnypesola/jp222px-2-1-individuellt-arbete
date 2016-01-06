@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -11,6 +12,28 @@ namespace WeatherApp.Models
         private List<Weather> _hourWeatherList = new List<Weather>();
 
         // Properties
+
+        public string DayName
+        {
+            get
+            {
+                string dateStr = StartDateTime.Value.ToString("d");
+
+                if(dateStr == DateTime.Now.ToString("d"))
+                {
+                    return "idag";
+                }
+                else if(dateStr == DateTime.Now.AddDays(1).ToString("d"))
+                {
+                    return "imorgon";
+                }
+                else
+                {
+                    return StartDateTime.Value.ToString("dddd", CultureInfo.CreateSpecificCulture("sv-SE")); 
+                }
+            }
+        }
+
         public List<Weather> HourWeatherList
         {
             get

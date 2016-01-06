@@ -182,6 +182,22 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\cloud0.png" />
+    <Content Include="Content\img\cloud1.png" />
+    <Content Include="Content\img\cloud2.png" />
+    <Content Include="Content\img\cloud3.png" />
+    <Content Include="Content\img\cloud4.png" />
+    <Content Include="Content\img\cloud5.png" />
+    <Content Include="Content\img\cloud6.png" />
+    <Content Include="Content\img\cloud7.png" />
+    <Content Include="Content\img\cloud8.png" />
+    <Content Include="Content\img\precipitation0.png" />
+    <Content Include="Content\img\precipitation1.png" />
+    <Content Include="Content\img\precipitation2.png" />
+    <Content Include="Content\img\precipitation3.png" />
+    <Content Include="Content\img\precipitation4.png" />
+    <Content Include="Content\img\precipitation5.png" />
+    <Content Include="Content\img\precipitation6.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

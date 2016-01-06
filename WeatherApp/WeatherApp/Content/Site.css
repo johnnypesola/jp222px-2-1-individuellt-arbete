@@ -22,3 +22,94 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.dayforecast-container {
+    background: #f8f8F8;
+    border: 1px solid #ffffff;
+    border-radius: 174px;
+    text-align: center;
+    height: 200px;
+
+}
+
+    .dayforecast-container h4 {
+        text-transform: capitalize;
+        
+        padding: 5px;
+        position: absolute;
+        top: -5px;
+        left: 32%;
+
+        border-radius: 10px;
+        
+        z-index: 2;
+    }
+
+    .dayforecast-container .cloud {
+        position: absolute;
+        top: 40px;
+        left: 20px;
+    }
+
+    .dayforecast-container .precipitation {
+        position: absolute;
+        top: 110px;
+        left: 15px;
+    }
+
+    .dayforecast-container small {
+        margin: 2px 0 0 0;
+        display: block;
+        font-size: 11px;
+        color: #ccc;
+    }
+
+    .dayforecast-container img {
+        width: 150px;
+    }
+
+    .dayforecast-container .temperature {
+        position: absolute;
+        top: 80px;
+        right: 33%; 
+        background: #fff;
+        padding: 5px;
+        border-radius: 10px;
+        border: 1px solid #eee;
+        z-index: 2;
+    }
+
+    .dayforecast-container .wind-direction {
+        text-align: center;
+        width: 28px;
+        height: 28px;
+        position: absolute;
+        bottom: 12px;
+        right: 110px; 
+        background: #fff;
+        padding: 5px;
+        border-radius: 20px;
+        z-index: 3;
+        background: #275ed0;
+        opacity: 0.8;
+    }
+
+        .dayforecast-container .wind-direction span {
+            position: relative;
+            bottom: 9px;
+            right: 0px;
+            font-size: 22px;
+            color: #ffffff;
+        }
+
+    .dayforecast-container .wind-speed {
+        position: absolute;
+        bottom: 10px;
+        right: 45px; 
+        background: #fff;
+        padding: 5px;
+        border-radius: 14px;
+        padding-left: 38px;
+        border: 1px solid #eee;
+        z-index: 2;
+    }
