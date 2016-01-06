@@ -31,12 +31,13 @@ namespace WeatherApp.Controllers
         {
             // Declare vars
             IEnumerable<Weather> weatherForPlace;
-
-            // Set place info
-            ViewBag.PlaceName = "Some place";
+            string placeName;
 
             // Get weather for place
-            weatherForPlace = _weatherService.GetWeatherForPlace(placeId);
+            weatherForPlace = _weatherService.GetWeatherForPlace(placeId, out placeName);
+
+            // Set place info
+            ViewBag.PlaceName = placeName;
 
             return View(weatherForPlace);
         }

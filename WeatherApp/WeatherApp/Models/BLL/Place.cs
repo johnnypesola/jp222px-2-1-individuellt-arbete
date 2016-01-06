@@ -47,6 +47,8 @@ namespace WeatherApp.Models
             [Required(ErrorMessage = "Var god ange ett GPS latitud värde.")]
             [Range(52.50, 70.75, ErrorMessage = "Värdet för latitud får minst vara 52.50 och max 70.75.")]
             public decimal Latitude { get; set; }
+
+            public Nullable<System.DateTime> LastWeatherUpdate { get; set; }
         }
 
         // To offer data annotation validation in service layer

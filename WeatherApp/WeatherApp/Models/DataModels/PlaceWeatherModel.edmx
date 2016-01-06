@@ -13,6 +13,7 @@
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Latitude" Type="decimal" Precision="18" Scale="15" Nullable="false" />
           <Property Name="Longitude" Type="decimal" Precision="18" Scale="15" Nullable="false" />
+          <Property Name="LastWeatherUpdate" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="Weather">
           <Key>
@@ -119,6 +120,7 @@
           <Property Name="Latitude" Type="Decimal" Precision="18" Scale="15" Nullable="false" />
           <Property Name="Longitude" Type="Decimal" Precision="18" Scale="15" Nullable="false" />
           <NavigationProperty Name="Weather" Relationship="Self.FK_Weather_Place" FromRole="Place" ToRole="Weather" />
+          <Property Name="LastWeatherUpdate" Type="DateTime" Precision="7" />
         </EntityType>
         <EntityType Name="Weather">
           <Key>
@@ -222,6 +224,7 @@
           <EntitySetMapping Name="Places">
             <EntityTypeMapping TypeName="PlaceWeatherModel.Place">
               <MappingFragment StoreEntitySet="Place">
+                <ScalarProperty Name="LastWeatherUpdate" ColumnName="LastWeatherUpdate" />
                 <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />

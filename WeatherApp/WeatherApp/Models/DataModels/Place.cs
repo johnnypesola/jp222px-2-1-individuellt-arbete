@@ -23,6 +23,7 @@ namespace WeatherApp.Models
         public string Name { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
+        public Nullable<System.DateTime> LastWeatherUpdate { get; set; }
     
         public virtual ICollection<Weather> Weather { get; set; }
     }

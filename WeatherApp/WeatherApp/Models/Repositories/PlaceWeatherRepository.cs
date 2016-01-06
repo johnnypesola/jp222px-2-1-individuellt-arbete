@@ -70,6 +70,11 @@ namespace WeatherApp.Models
             return _entities.Weathers.Find(weatherId);
         }
 
+        public IEnumerable<Weather> FindPlaceWeatherForDateTime(Weather weather)
+        {
+            return _entities.Weathers.Where(w => w.DateTime == weather.DateTime && w.PlaceId == weather.PlaceId).OrderByDescending(w => w.WeatherId).ToList();
+        }
+
         public void InsertWeather(Weather weather)
         {
             _entities.Weathers.Add(weather);
@@ -78,6 +83,7 @@ namespace WeatherApp.Models
         public void InsertWeather(IEnumerable<Weather> weatherList)
         {
             _entities.Weathers.AddRange(weatherList);
+
         }
 
         public void UpdateWeather(Weather weather)
@@ -93,13 +99,18 @@ namespace WeatherApp.Models
 
         public void DeleteWeather(Weather weather)
         {
-            // If contact object is not attatched to the DbContext object, attach it. (track it)
+            // If weather object is not attatched to the DbContext object, attach it. (track it)
             if (_entities.Entry(weather).State == EntityState.Detached)
             {
                 _entities.Weathers.Attach(weather);
             }
 
             _entities.Weathers.Remove(weather);
+        }
+
+        public void DeleteWeatherForPlace(Place place)
+        {
+            _entities.Weathers.RemoveRange(_entities.Weathers.Where(w => w.PlaceId == place.PlaceId));
         }
 
         #endregion
@@ -110,6 +121,10 @@ namespace WeatherApp.Models
             {
                 _entities.SaveChanges();
             }
+            catch (Exception exception)
+            {
+                Trace.TraceInformation(exception.InnerException.Message);
+            }/*
             catch (DbEntityValidationException dbEx)
             {
                 foreach (var validationErrors in dbEx.EntityValidationErrors)
@@ -121,7 +136,7 @@ namespace WeatherApp.Models
                                                 validationError.ErrorMessage);
                     }
                 }
-            }
+            }*/
         }
     }
 }

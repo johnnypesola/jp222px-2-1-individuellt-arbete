@@ -8,6 +8,6 @@ namespace WeatherApp.Models
 {
     public interface IPlaceWeatherService
     {
-        IEnumerable<Weather> GetWeatherForPlace(int placeId);
+        IEnumerable<Weather> GetWeatherForPlace(int placeId, out string placeName);
     }
 }
