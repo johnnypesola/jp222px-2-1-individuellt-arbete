@@ -8,52 +8,18 @@ namespace WeatherApp.Models
 {
     public class PlaceWeatherService : IPlaceWeatherService
     {
-        private const int WEATHER_DATA_REFRESH_HOURS = 1;
+        private const int WEATHER_DATA_REFRESH_HOURS = 2;
         private readonly ISmhiWebService _webService;
         private readonly IPlaceWeatherRepository _repository;
 
         // Constructor for injecting repositories and services (makes testing easier). Handled in unityconfig
-        public PlaceWeatherService(ISmhiWebService webService, IPlaceWeatherRepository placeRepository)
+        public PlaceWeatherService(ISmhiWebService webService, IPlaceWeatherRepository placeWeatherRepository)
         {
             _webService = webService;
-            _repository = placeRepository;
+            _repository = placeWeatherRepository;
         }
 
         // Private methods
-        private bool HasWeatherForNumberOfDays(IEnumerable<Weather> weatherList, int days)
-        {
-            DateTime currentDate = new DateTime();
-            bool foundMatch;
-            
-            while(days > 0)
-            {
-                foundMatch = false;
-
-                foreach (Weather weather in weatherList)
-                {
-                    if(
-                        weather.DateTime.Year == currentDate.Year &&
-                        weather.DateTime.Month == currentDate.Month &&
-                        weather.DateTime.Day == currentDate.Day
-                    )
-                    {
-                        foundMatch = true;
-                    }
-                }
-
-                // Abort if there is no weather for this day.
-                if (!foundMatch)
-                {
-                    return false;
-                }
-
-                currentDate.AddDays(1);
-                days--;
-            }
-
-            return true;
-        }
-
         private void AddWeatherToRepository(Place place, IEnumerable<Weather> weatherList)
         {
             // Remove old weather
@@ -66,12 +32,62 @@ namespace WeatherApp.Models
         }
 
         // Public methods
+
+        public IEnumerable<Place> GetPlaces()
+        {
+            return _repository.GetAllPlaces();
+        }
+
+        public List<DayForecast> ConvertToDayForecasts(IEnumerable<Weather> weatherList)
+        {
+            int lastDayNum = 0;
+            int count = 0;
+            var dayForecastList = new List<DayForecast>();
+            DayForecast dayForecast = new DayForecast();
+
+            foreach (Weather weather in weatherList.OrderBy(w => w.DateTime))
+            {
+                count++;
+
+                // If its a new day.
+                if (lastDayNum != 0 && weather.DateTime.Day != lastDayNum)
+                {
+                    dayForecastList.Add(dayForecast);
+                    dayForecast = new DayForecast();
+                }
+
+                // Add weather to day forecast
+                dayForecast.HourWeatherList.Add(weather);
+
+                lastDayNum = weather.DateTime.Day;
+
+                // If its the last iteration
+                if (weatherList.ToList().Count == count)
+                {
+                    dayForecastList.Add(dayForecast);
+                }
+            }
+
+            return dayForecastList;
+        }
+
+        public IEnumerable<DayForecast> GetDayForecastsForPlace(int placeId, out string placeName)
+        {
+            return ConvertToDayForecasts(GetWeatherForPlace(placeId, out placeName));
+        }
+
         public IEnumerable<Weather> GetWeatherForPlace(int placeId, out string placeName)
         {
             IEnumerable<Weather> weatherList = new List<Weather>(100);
 
-            // Get place
+            // Try to get place
             Place place = _repository.GetPlace(placeId);
+
+            if(place == null)
+            {
+                placeName = "Not found";
+                return null;
+            }
 
             // Set out variable place name
             placeName = place.Name;

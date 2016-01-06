@@ -1,0 +1,7 @@
+﻿@model WeatherApp.Models.Place
+
+<tr>
+    <td>
+        @Html.ActionLink(@Model.Name, "Get", new { placeId = Model.PlaceId })
+    </td>
+</tr>

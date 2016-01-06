@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WeatherApp.Models.DayForecast>
+﻿@model IEnumerable<WeatherApp.Models.Weather>
 
 @{
     ViewBag.Title = "Get";
@@ -16,6 +16,7 @@
         <th>Molnighet</th>
         <th>Vindriktning</th>
         <th>Vindstyrka</th>
+        <th></th>
     </tr>
 
     @Html.DisplayFor(m => m)

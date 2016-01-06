@@ -146,6 +146,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BLL\DayForecast.cs" />
     <Compile Include="Models\BLL\Place.cs" />
     <Compile Include="Models\BLL\Weather.cs" />
     <Compile Include="Models\DataModels\Place.cs">
@@ -239,8 +240,11 @@
     <Content Include="Views\Place\Delete.cshtml" />
     <Content Include="Scripts\jquery.validate.fixes.js" />
     <Content Include="Views\Weather\Index.cshtml" />
-    <Content Include="Views\Weather\Get.cshtml" />
+    <Content Include="Views\Weather\GetDetailed.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Weather.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Place.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DayForecast.cshtml" />
+    <Content Include="Views\Weather\Get.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

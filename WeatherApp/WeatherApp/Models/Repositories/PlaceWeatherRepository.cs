@@ -62,7 +62,7 @@ namespace WeatherApp.Models
 
         public IEnumerable<Weather> GetWeatherForPlace(int placeId)
         {
-            return _entities.Weathers.Where(w => w.PlaceId == placeId).OrderByDescending(w => w.WeatherId).ToList();
+            return _entities.Weathers.Where(w => w.PlaceId == placeId).OrderBy(w => w.DateTime).ToList();
         }
 
         public Weather GetWeather(int weatherId)

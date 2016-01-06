@@ -1,13 +1,13 @@
-﻿@model IEnumerable<WeatherApp.Models.Weather>
+﻿@model IEnumerable<WeatherApp.Models.Place>
 
 @{
-    ViewBag.Title = "Väder";
+    ViewBag.Title = "Välj ort att visa väder för";
 }
 
 <h2>@ViewBag.Title</h2>
 
 <table class="table">
 
-    @Html.DisplayFor(m => m, "Weather")
+    @Html.DisplayFor(m => m)
 
 </table>

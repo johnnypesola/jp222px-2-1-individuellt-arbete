@@ -1,0 +1,29 @@
+﻿@model WeatherApp.Models.DayForecast
+
+<tr>
+    <td>
+        @Model.StartDateTime
+    </td>
+    <td>
+        @Model.GetDayWeather().Humidity
+    </td>
+    <td>
+        @Model.GetDayWeather().Precipitation
+    </td>
+    <td>
+        @Model.GetDayWeather().Temperature
+    </td>
+    <td>
+        @Model.GetDayWeather().ThunderStormProbability
+    </td>
+    <td>
+        @Model.GetDayWeather().TotalCloudCover
+    </td>
+    <td>
+        @Model.GetDayWeather().WindDirection
+    </td>
+    <td>
+        @Model.GetDayWeather().WindSpeed
+    </td>
+</tr>
+
