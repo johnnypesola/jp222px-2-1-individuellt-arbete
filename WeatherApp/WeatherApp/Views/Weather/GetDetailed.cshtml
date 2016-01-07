@@ -1,26 +1,26 @@
 ﻿@model IEnumerable<WeatherApp.Models.Weather>
 
-@{
-    ViewBag.Title = "Get";
-}
+<h2>@ViewBag.PlaceName <small>@ViewBag.Date.ToString("yyyy-MM-dd")</small></h2>
 
-<h2>@ViewBag.PlaceName</h2>
+@Html.ActionLink("Tillbaka", "Get", new { placeId = ViewBag.PlaceId }, new { @class = "button btn btn-default" })
 
-<table>
-    <tr>
-        <th>Tid</th>
-        <th>Luftfuktighet</th>
-        <th>Vädertyp</th>
-        <th>Temperatur</th>
-        <th>Chans för åska</th>
-        <th>Molnighet</th>
-        <th>Vindriktning</th>
-        <th>Vindstyrka</th>
-        <th></th>
-    </tr>
-
-    @Html.DisplayFor(m => m)
-
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tid</th>
+            <th>Temperatur</th>
+            <th>Vädertyp</th>
+            <th>Nederbördstyp</th>
+            <th>Nederbörd</th>
+            <th>Luftfuktighet</th>
+            <th>Chans för åska</th>
+            <th>Vindriktning</th>
+            <th>Vindstyrka</th>
+        </tr>
+    </thead>
+    <tbody>
+        @Html.DisplayFor(m => m)
+    </tbody>
 </table>
     
-
+@Html.ActionLink("Tillbaka", "Get", new { placeId = ViewBag.PlaceId }, new { @class = "button btn btn-default" })

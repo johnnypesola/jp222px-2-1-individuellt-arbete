@@ -22,6 +22,8 @@ namespace WeatherApp.Models
 
         IEnumerable<Weather> GetWeatherForPlace(int placeId);
 
+        IEnumerable<Weather> GetWeatherForPlace(int placeId, DateTime dateToGetFor);
+
         IEnumerable<Weather> FindPlaceWeatherForDateTime(Weather weather);
 
         void DeleteWeatherForPlace(Place place);

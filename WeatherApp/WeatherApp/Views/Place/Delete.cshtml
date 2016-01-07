@@ -1,40 +1,20 @@
 ﻿@model WeatherApp.Models.Place
 
     <div>
-        <h2>Är du säker på att du vill radera platsen?</h2>
-        <dl>
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Latitude)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Latitude)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Longitude)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Longitude)
-            </dd>
-        </dl>
+        <div class="row">
+            <h2>Radera plats</h2>
+            <p class="alert alert-danger col-md-4">
+                Är du säker på att du vill radera platsen <strong>@Model.Name</strong>?
+            </p>
+        </div>
     
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
     
             <div>
-                <input type="submit" value="Radera" class="button" />
-                @Html.ActionLink("Tillbaka till listan", "Index", null, new { @class = "button" })
+                <input type="submit" value="Radera" class="button btn btn-danger" />
+                @Html.ActionLink("Tillbaka till listan", "Index", null, new { @class = "button btn btn-default" })
             </div>
         }
 

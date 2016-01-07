@@ -73,10 +73,10 @@ namespace WeatherApp.Models
 
         public IEnumerable<DayForecast> GetDayForecastsForPlace(int placeId, out string placeName)
         {
-            return ConvertToDayForecasts(GetWeatherForPlace(placeId, out placeName));
+            return ConvertToDayForecasts(GetDateWeatherForPlace(placeId, out placeName));
         }
 
-        public IEnumerable<Weather> GetWeatherForPlace(int placeId, out string placeName)
+        public IEnumerable<Weather> GetDateWeatherForPlace(int placeId, out string placeName, DateTime? dateToGetFor = null)
         {
             IEnumerable<Weather> weatherList = new List<Weather>(100);
 
@@ -106,7 +106,14 @@ namespace WeatherApp.Models
             }
 
             // Try to get weather from repository
-            weatherList = _repository.GetWeatherForPlace(placeId);
+            if(dateToGetFor == null)
+            {
+                weatherList = _repository.GetWeatherForPlace(placeId);
+            }
+            else
+            {
+                weatherList = _repository.GetWeatherForPlace(placeId, dateToGetFor.Value);
+            }
 
             return weatherList;
         }

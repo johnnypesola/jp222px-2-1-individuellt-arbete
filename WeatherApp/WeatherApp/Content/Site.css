@@ -30,6 +30,11 @@ textarea {
     text-align: center;
     height: 200px;
 
+    margin: 10px 0;
+}
+
+.dayforecast-container:hover {
+    background: #eeeeff;
 }
 
     .dayforecast-container h4 {
@@ -113,3 +118,7 @@ textarea {
         border: 1px solid #eee;
         z-index: 2;
     }
+
+.table .precipitation, .table .cloud {
+    width: 50px;
+}

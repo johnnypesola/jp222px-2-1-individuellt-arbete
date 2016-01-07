@@ -7,38 +7,44 @@
 <h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Skapa ny plats", "Create")
+    @Html.ActionLink("Skapa ny plats", "Create", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Latitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Longitude)
-        </th>
-        <th></th>
-    </tr>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Latitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Longitude)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Latitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Longitude)
-        </td>
-        <td>
-            @Html.ActionLink("Redigera", "Edit", new { id=item.PlaceId }) |
-            @Html.ActionLink("Radera", "Delete", new { id=item.PlaceId })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @String.Format("{0:0.000000}", item.Latitude)
+                </td>
+                <td>
+                    @String.Format("{0:0.000000}", item.Longitude)
+                </td>
+                <td>
+                    @Html.ActionLink("Redigera", "Edit", new { id = item.PlaceId }, new { @class = "btn btn-warning btn-xs" })
+                    @Html.ActionLink("Radera", "Delete", new { id = item.PlaceId }, new { @class = "btn btn-danger btn-xs" })
+                </td>
+            </tr>
+        }
+
+    </tbody>
 
 </table>

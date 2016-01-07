@@ -65,6 +65,16 @@ namespace WeatherApp.Models
             return _entities.Weathers.Where(w => w.PlaceId == placeId).OrderBy(w => w.DateTime).ToList();
         }
 
+        public IEnumerable<Weather> GetWeatherForPlace(int placeId, DateTime dateToGetFor)
+        {
+            return _entities.Weathers.Where(
+                        w => w.PlaceId == placeId &&
+                             w.DateTime.Year == dateToGetFor.Year &&
+                             w.DateTime.Month == dateToGetFor.Month &&
+                             w.DateTime.Day == dateToGetFor.Day
+                    ).OrderBy(w => w.DateTime).ToList();
+        }
+
         public Weather GetWeather(int weatherId)
         {
             return _entities.Weathers.Find(weatherId);

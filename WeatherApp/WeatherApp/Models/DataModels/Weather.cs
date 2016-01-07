@@ -24,6 +24,7 @@ namespace WeatherApp.Models
         public byte Precipitation { get; set; }
         public byte TotalCloudCover { get; set; }
         public byte ThunderStormProbability { get; set; }
+        public decimal PrecipitationIntensity { get; set; }
     
         public virtual Place Place { get; set; }
     }

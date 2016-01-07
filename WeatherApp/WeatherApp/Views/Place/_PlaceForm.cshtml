@@ -14,7 +14,7 @@
         <div>
             @Html.LabelFor(model => model.Name)
             <div>
-                @Html.EditorFor(model => model.Name, new { maxlength = "50", size = "50" })
+                @Html.TextBoxFor(model => model.Name, null, new { @maxlength = "50", @size = "50", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "validation-message" })
             </div>
         </div>
@@ -22,7 +22,7 @@
         <div>
             @Html.LabelFor(model => model.Longitude)
             <div>
-                @Html.EditorFor(model => model.Longitude, new { maxlength = "50", size = "50" })
+                @Html.TextBoxFor(model => model.Longitude, null, new { @maxlength = "50", @size = "50", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "validation-message" })
             </div>
         </div>
@@ -30,11 +30,11 @@
         <div>
             @Html.LabelFor(model => model.Latitude)
             <div>
-                @Html.EditorFor(model => model.Latitude, new { maxlength = "50", size = "50" })
+                @Html.TextBoxFor(model => model.Latitude, null, new { @maxlength = "50", @size = "50", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "validation-message" })
             </div>
         </div>
         <br />
-        <input type="submit" value="Spara" class="button" /> @Html.ActionLink("Tillbaka till listan", "Index", null, new { @class = "button" })
+        <input type="submit" value="Spara" class="button btn btn-primary" /> @Html.ActionLink("Tillbaka till listan", "Index", null, new { @class = "button btn btn-default" })
     }
 </div>

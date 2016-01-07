@@ -19,7 +19,11 @@ namespace WeatherApp.Models
             {
                 string dateStr = StartDateTime.Value.ToString("d");
 
-                if(dateStr == DateTime.Now.ToString("d"))
+                if (dateStr == DateTime.Now.AddDays(-1).ToString("d"))
+                {
+                    return "igår";
+                }
+                else if(dateStr == DateTime.Now.ToString("d"))
                 {
                     return "idag";
                 }
@@ -55,7 +59,7 @@ namespace WeatherApp.Models
             }
         }
 
-        int PlaceId
+        public int PlaceId
         {
             get
             {
@@ -75,7 +79,8 @@ namespace WeatherApp.Models
                 TotalCloudCover = (byte)HourWeatherList.Average(w => w.TotalCloudCover),
                 WindDirection = (int)HourWeatherList.Average(w => w.WindDirection),
                 WindSpeed = HourWeatherList.Average(w => w.WindSpeed),
-                
+                PrecipitationIntensity = HourWeatherList.Average(w => w.PrecipitationIntensity),
+
                 // Get the most ocurring weather type
                 Precipitation = HourWeatherList.GroupBy(w => w).OrderByDescending(grp => grp.Count()).Select(grp => grp.Key).First().Precipitation,
 

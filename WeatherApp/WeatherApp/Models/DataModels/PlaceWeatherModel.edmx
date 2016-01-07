@@ -29,6 +29,7 @@
           <Property Name="Precipitation" Type="tinyint" Nullable="false" />
           <Property Name="TotalCloudCover" Type="tinyint" Nullable="false" />
           <Property Name="ThunderStormProbability" Type="tinyint" Nullable="false" />
+          <Property Name="PrecipitationIntensity" Type="decimal" Precision="3" Scale="1" Nullable="false" />
         </EntityType>
         <Association Name="FK_Weather_Place">
           <End Role="Place" Type="Self.Place" Multiplicity="1">
@@ -77,6 +78,7 @@
           <Parameter Name="Precipitation" Type="tinyint" Mode="In" />
           <Parameter Name="TotalCloudCover" Type="tinyint" Mode="In" />
           <Parameter Name="ThunderStormProbability" Type="tinyint" Mode="In" />
+          <Parameter Name="PrecipitationIntensity" Type="decimal" Mode="In" />
           <Parameter Name="InsertId" Type="int" Mode="InOut" />
         </Function>
         <Function Name="usp_WeatherDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="appSchema">
@@ -98,6 +100,7 @@
           <Parameter Name="Precipitation" Type="tinyint" Mode="In" />
           <Parameter Name="TotalCloudCover" Type="tinyint" Mode="In" />
           <Parameter Name="ThunderStormProbability" Type="tinyint" Mode="In" />
+          <Parameter Name="PrecipitationIntensity" Type="decimal" Mode="In" />
         </Function>
         <EntityContainer Name="PlaceWeatherModelStoreContainer">
           <EntitySet Name="Place" EntityType="Self.Place" Schema="appSchema" store:Type="Tables" />
@@ -137,6 +140,7 @@
           <Property Name="TotalCloudCover" Type="Byte" Nullable="false" />
           <Property Name="ThunderStormProbability" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Place" Relationship="Self.FK_Weather_Place" FromRole="Weather" ToRole="Place" />
+          <Property Name="PrecipitationIntensity" Type="Decimal" Nullable="false" />
         </EntityType>
         <Association Name="FK_Weather_Place">
           <End Role="Place" Type="Self.Place" Multiplicity="1">
@@ -192,6 +196,7 @@
             <Parameter Name="Precipitation" Mode="In" Type="Byte" />
             <Parameter Name="TotalCloudCover" Mode="In" Type="Byte" />
             <Parameter Name="ThunderStormProbability" Mode="In" Type="Byte" />
+            <Parameter Name="PrecipitationIntensity" Mode="In" Type="Decimal" />
             <Parameter Name="InsertId" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_WeatherGet">
@@ -213,6 +218,7 @@
             <Parameter Name="Precipitation" Mode="In" Type="Byte" />
             <Parameter Name="TotalCloudCover" Mode="In" Type="Byte" />
             <Parameter Name="ThunderStormProbability" Mode="In" Type="Byte" />
+            <Parameter Name="PrecipitationIntensity" Mode="In" Type="Decimal" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -254,6 +260,7 @@
           <EntitySetMapping Name="Weathers">
             <EntityTypeMapping TypeName="PlaceWeatherModel.Weather">
               <MappingFragment StoreEntitySet="Weather">
+                <ScalarProperty Name="PrecipitationIntensity" ColumnName="PrecipitationIntensity" />
                 <ScalarProperty Name="WeatherId" ColumnName="WeatherId" />
                 <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
@@ -269,6 +276,7 @@
             <EntityTypeMapping TypeName="PlaceWeatherModel.Weather">
               <ModificationFunctionMapping>
                 <InsertFunction FunctionName="PlaceWeatherModel.Store.usp_WeatherCreate" RowsAffectedParameter="InsertId">
+                  <ScalarProperty Name="PrecipitationIntensity" ParameterName="PrecipitationIntensity" />
                   <ScalarProperty Name="ThunderStormProbability" ParameterName="ThunderStormProbability" />
                   <ScalarProperty Name="TotalCloudCover" ParameterName="TotalCloudCover" />
                   <ScalarProperty Name="Precipitation" ParameterName="Precipitation" />
@@ -284,6 +292,7 @@
                   <ScalarProperty Name="WeatherId" ParameterName="WeatherId" />
                 </DeleteFunction>
                 <UpdateFunction FunctionName="PlaceWeatherModel.Store.usp_WeatherUpdate">
+                  <ScalarProperty Name="PrecipitationIntensity" ParameterName="PrecipitationIntensity" Version="Current" />
                   <ScalarProperty Name="ThunderStormProbability" ParameterName="ThunderStormProbability" Version="Current" />
                   <ScalarProperty Name="TotalCloudCover" ParameterName="TotalCloudCover" Version="Current" />
                   <ScalarProperty Name="Precipitation" ParameterName="Precipitation" Version="Current" />

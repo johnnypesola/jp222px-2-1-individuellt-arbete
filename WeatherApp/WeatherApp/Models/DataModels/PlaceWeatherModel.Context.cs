@@ -102,7 +102,7 @@ namespace WeatherApp.Models.DataModels
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_PlaceUpdate", placeIdParameter, nameParameter, longitudeParameter, latitudeParameter);
         }
     
-        public virtual int usp_WeatherCreate(Nullable<int> placeId, Nullable<System.DateTime> dateTime, Nullable<decimal> temperature, Nullable<int> windDirection, Nullable<decimal> windSpeed, Nullable<byte> humidity, Nullable<byte> precipitation, Nullable<byte> totalCloudCover, Nullable<byte> thunderStormProbability, ObjectParameter insertId)
+        public virtual int usp_WeatherCreate(Nullable<int> placeId, Nullable<System.DateTime> dateTime, Nullable<decimal> temperature, Nullable<int> windDirection, Nullable<decimal> windSpeed, Nullable<byte> humidity, Nullable<byte> precipitation, Nullable<byte> totalCloudCover, Nullable<byte> thunderStormProbability, Nullable<decimal> precipitationIntensity, ObjectParameter insertId)
         {
             var placeIdParameter = placeId.HasValue ?
                 new ObjectParameter("PlaceId", placeId) :
@@ -140,7 +140,11 @@ namespace WeatherApp.Models.DataModels
                 new ObjectParameter("ThunderStormProbability", thunderStormProbability) :
                 new ObjectParameter("ThunderStormProbability", typeof(byte));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_WeatherCreate", placeIdParameter, dateTimeParameter, temperatureParameter, windDirectionParameter, windSpeedParameter, humidityParameter, precipitationParameter, totalCloudCoverParameter, thunderStormProbabilityParameter, insertId);
+            var precipitationIntensityParameter = precipitationIntensity.HasValue ?
+                new ObjectParameter("PrecipitationIntensity", precipitationIntensity) :
+                new ObjectParameter("PrecipitationIntensity", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_WeatherCreate", placeIdParameter, dateTimeParameter, temperatureParameter, windDirectionParameter, windSpeedParameter, humidityParameter, precipitationParameter, totalCloudCoverParameter, thunderStormProbabilityParameter, precipitationIntensityParameter, insertId);
         }
     
         public virtual int usp_WeatherGet(Nullable<int> placeId, string name, Nullable<System.DateTime> dateTime)
@@ -169,7 +173,7 @@ namespace WeatherApp.Models.DataModels
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_WeatherDelete", weatherIdParameter);
         }
     
-        public virtual int usp_WeatherUpdate(Nullable<int> weatherId, Nullable<int> placeId, Nullable<System.DateTime> dateTime, Nullable<decimal> temperature, Nullable<int> windDirection, Nullable<decimal> windSpeed, Nullable<byte> humidity, Nullable<byte> precipitation, Nullable<byte> totalCloudCover, Nullable<byte> thunderStormProbability)
+        public virtual int usp_WeatherUpdate(Nullable<int> weatherId, Nullable<int> placeId, Nullable<System.DateTime> dateTime, Nullable<decimal> temperature, Nullable<int> windDirection, Nullable<decimal> windSpeed, Nullable<byte> humidity, Nullable<byte> precipitation, Nullable<byte> totalCloudCover, Nullable<byte> thunderStormProbability, Nullable<decimal> precipitationIntensity)
         {
             var weatherIdParameter = weatherId.HasValue ?
                 new ObjectParameter("WeatherId", weatherId) :
@@ -211,7 +215,11 @@ namespace WeatherApp.Models.DataModels
                 new ObjectParameter("ThunderStormProbability", thunderStormProbability) :
                 new ObjectParameter("ThunderStormProbability", typeof(byte));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_WeatherUpdate", weatherIdParameter, placeIdParameter, dateTimeParameter, temperatureParameter, windDirectionParameter, windSpeedParameter, humidityParameter, precipitationParameter, totalCloudCoverParameter, thunderStormProbabilityParameter);
+            var precipitationIntensityParameter = precipitationIntensity.HasValue ?
+                new ObjectParameter("PrecipitationIntensity", precipitationIntensity) :
+                new ObjectParameter("PrecipitationIntensity", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_WeatherUpdate", weatherIdParameter, placeIdParameter, dateTimeParameter, temperatureParameter, windDirectionParameter, windSpeedParameter, humidityParameter, precipitationParameter, totalCloudCoverParameter, thunderStormProbabilityParameter, precipitationIntensityParameter);
         }
     }
 }

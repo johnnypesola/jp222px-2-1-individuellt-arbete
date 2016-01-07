@@ -1,17 +1,14 @@
-﻿@{
-    Layout = null;
+﻿
+@{
+    ViewBag.Title = "Ett fel uppstod";
 }
+    <div class="row">
+        <h2>@ViewBag.Title</h2>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Error</title>
-</head>
-<body>
-    <hgroup>
-        <h1>Error.</h1>
-        <h2>An error occurred while processing your request.</h2>
-    </hgroup>
-</body>
-</html>
+        <p class="alert alert-danger col-md-4">
+            @ViewBag.Message
+        </p>
+    </div>
+
+    @Html.ActionLink("Tillbaka", "Index", null, new { @class = "button btn btn-default" })
+

@@ -2,31 +2,62 @@
 
 <tr>
     <td>
-        @Model.DateTime
+        Kl. @Model.DateTime.ToString("HH:mm")
     </td>
     <td>
-        @Model.Humidity
+        @Model.Temperature °C
     </td>
     <td>
-        @Model.Precipitation
+        <img class="cloud" src="~/Content/img/cloud@(Model.TotalCloudCover).png">
     </td>
     <td>
-        @Model.Temperature
+        <img class="precipitation" src="~/Content/img/precipitation@(Model.Precipitation).png">
     </td>
     <td>
-        @Model.ThunderStormProbability
+        @Model.PrecipitationIntensity mm/tim
     </td>
     <td>
-        @Model.TotalCloudCover
+        @Model.Humidity %
     </td>
     <td>
-        @Model.WindDirection
+        @Model.ThunderStormProbability %
     </td>
     <td>
-        @Model.WindSpeed
+        @{int windDir = @Model.WindDirection;}
+        @if (windDir > 337 || windDir <= 22)
+        {
+            <span>↑</span>
+        }
+        @if (windDir > 22 && windDir <= 67)
+        {
+            <span>↗</span>
+        }
+        @if (windDir > 67 && windDir <= 112)
+        {
+            <span>→</span>
+        }
+        @if (windDir > 112 && windDir <= 157)
+        {
+            <span>↘</span>
+        }
+        @if (windDir > 157 && windDir <= 202)
+        {
+            <span>↓</span>
+        }
+        @if (windDir > 202 && windDir <= 247)
+        {
+            <span>↙</span>
+        }
+        @if (windDir > 247 && windDir <= 292)
+        {
+            <span>←</span>
+        }
+        @if (windDir > 292 && windDir <= 337)
+        {
+            <span>↖</span>
+        }
     </td>
     <td>
-        @Html.ActionLink("Radera", "Delete", new { id = Model.WeatherId })
+        @Model.WindSpeed m/s
     </td>
 </tr>
-

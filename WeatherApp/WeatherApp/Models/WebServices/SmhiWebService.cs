@@ -21,12 +21,19 @@ namespace WeatherApp.Models.WebServices
             // Fetch JSON from web
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uriString);
 
-            using (var response = request.GetResponse())
+            try
             {
-                using (var reader = new StreamReader(response.GetResponseStream()))
+                using (var response = request.GetResponse())
                 {
-                    rawJson = reader.ReadToEnd();
+                    using (var reader = new StreamReader(response.GetResponseStream()))
+                    {
+                        rawJson = reader.ReadToEnd();
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                throw new HandleableExeption("Kunde inte hämta data ifrån SMHI");
             }
 
             // Load JSON from temp file.
@@ -53,7 +60,8 @@ namespace WeatherApp.Models.WebServices
                     Humidity = (Byte)weatherData["r"],
                     Precipitation = (Byte)weatherData["pcat"],
                     TotalCloudCover = (Byte)weatherData["tcc"],
-                    ThunderStormProbability = (Byte)weatherData["tstm"]
+                    ThunderStormProbability = (Byte)weatherData["tstm"],
+                    PrecipitationIntensity = (Decimal)weatherData["pit"]
                 };
 
                 // Check if object is valid

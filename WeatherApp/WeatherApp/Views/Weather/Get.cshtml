@@ -2,20 +2,8 @@
 
 <h2>@ViewBag.PlaceName</h2>
 
-<table>
-    <tr>
-        <th>Tid</th>
-        <th>Luftfuktighet</th>
-        <th>Vädertyp</th>
-        <th>Temperatur</th>
-        <th>Chans för åska</th>
-        <th>Molnighet</th>
-        <th>Vindriktning</th>
-        <th>Vindstyrka</th>
-    </tr>
-</table>
+@Html.ActionLink("Tillbaka till listan", "Index", null, new { @class = "button btn btn-default" })
 
 <div class="row">
     @Html.DisplayFor(m => m)
 </div>    
-

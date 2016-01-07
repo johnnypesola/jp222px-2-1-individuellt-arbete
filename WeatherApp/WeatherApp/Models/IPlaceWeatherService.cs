@@ -8,7 +8,7 @@ namespace WeatherApp.Models
 {
     public interface IPlaceWeatherService
     {
-        IEnumerable<Weather> GetWeatherForPlace(int placeId, out string placeName);
+        IEnumerable<Weather> GetDateWeatherForPlace(int placeId, out string placeName, DateTime? dateToGetFor);
 
         IEnumerable<DayForecast> GetDayForecastsForPlace(int placeId, out string placeName);
 

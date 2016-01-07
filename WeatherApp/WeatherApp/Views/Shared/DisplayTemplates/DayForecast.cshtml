@@ -1,6 +1,6 @@
 ﻿@model WeatherApp.Models.DayForecast
 
-<div class="col-md-2 dayforecast-container">
+<a href="GetDetailed?placeId=@(Model.PlaceId)&year=@(Model.StartDateTime.Value.Year)&month=@(Model.StartDateTime.Value.Month)&day=@(Model.StartDateTime.Value.Day)" class="col-md-2 dayforecast-container">
     <h4>
         @Model.DayName <small>@Model.StartDateTime.Value.ToString("yyyy-MM-dd")</small>
     </h4>
@@ -9,7 +9,7 @@
     <img class="precipitation" src="~/Content/img/precipitation@(Model.GetDayWeather().Precipitation).png">
     
     <div class="temperature">
-        @String.Format("{0:0.00}", Model.GetDayWeather().Temperature) °
+        @String.Format("{0:0.0}", Model.GetDayWeather().Temperature) °C
     </div>
     <div class="wind-direction">
         @{int windDir = @Model.GetDayWeather().WindDirection;}
@@ -47,8 +47,8 @@
         }
     </div>
     <div class="wind-speed">
-        @String.Format("{0:0.00}", Model.GetDayWeather().WindSpeed) m/s
+        @String.Format("{0:0.0}", Model.GetDayWeather().WindSpeed) m/s
     </div>
-</div>
+</a>
 <!-- @Model.GetDayWeather().Humidity % @Model.GetDayWeather().ThunderStormProbability % -->
 

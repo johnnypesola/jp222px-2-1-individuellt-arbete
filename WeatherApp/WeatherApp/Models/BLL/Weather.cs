@@ -60,6 +60,12 @@ namespace WeatherApp.Models
             [Required(ErrorMessage = "Var god ange Sannolikhet för åska.")]
             [Range(0, 100, ErrorMessage = "Värdet för Molnmängd får max vara 100 och minst 0.")]
             public byte ThunderStormProbability { get; set; }
+
+            [Display(Name = "Nederbörd")]
+            [DisplayFormat(ConvertEmptyStringToNull = false)]
+            [Required(ErrorMessage = "Var god ange Nederbörd.")]
+            [Range(0, 255, ErrorMessage = "Värdet för Nederbörd får max vara 255 och minst 0.")]
+            public decimal PrecipitationIntensity { get; set; }
         }
 
         // To offer data annotation validation in service layer
