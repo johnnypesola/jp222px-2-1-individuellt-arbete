@@ -15,7 +15,7 @@
             @Html.LabelFor(model => model.Name)
             <div>
                 @Html.TextBoxFor(model => model.Name, null, new { @maxlength = "50", @size = "50", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "validation-message" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -23,7 +23,7 @@
             @Html.LabelFor(model => model.Longitude)
             <div>
                 @Html.TextBoxFor(model => model.Longitude, null, new { @maxlength = "50", @size = "50", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "validation-message" })
+                @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -31,7 +31,7 @@
             @Html.LabelFor(model => model.Latitude)
             <div>
                 @Html.TextBoxFor(model => model.Latitude, null, new { @maxlength = "50", @size = "50", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "validation-message" })
+                @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
             </div>
         </div>
         <br />

@@ -130,9 +130,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="400.aspx.cs">
+      <DependentUpon>400.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="400.aspx.designer.cs">
+      <DependentUpon>400.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="500.aspx.cs">
+      <DependentUpon>500.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="500.aspx.designer.cs">
+      <DependentUpon>500.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Extensions\DecimalModelBinder.cs" />
-    <Compile Include="App_Extensions\ExceptionExtensions.cs" />
-    <Compile Include="App_Extensions\ValidationExtensions.cs" />
     <Compile Include="App_GlobalResources\Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -147,40 +166,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BLL\DayForecast.cs" />
-    <Compile Include="Models\BLL\Place.cs" />
-    <Compile Include="Models\BLL\Weather.cs" />
-    <Compile Include="Models\DataModels\Place.cs">
-      <DependentUpon>PlaceWeatherModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataModels\PlaceWeatherModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PlaceWeatherModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataModels\PlaceWeatherModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PlaceWeatherModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataModels\PlaceWeatherModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PlaceWeatherModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataModels\Weather.cs">
-      <DependentUpon>PlaceWeatherModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\IPlaceWeatherService.cs" />
-    <Compile Include="Models\Repositories\BaseRepository.cs" />
-    <Compile Include="Models\Repositories\IPlaceWeatherRepository.cs" />
-    <Compile Include="Models\Repositories\PlaceWeatherRepository.cs" />
-    <Compile Include="Models\PlaceWeatherService.cs" />
-    <Compile Include="Models\WebServices\ISmhiWebService.cs" />
-    <Compile Include="Models\WebServices\SmhiWebService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="400.aspx" />
+    <Content Include="400.html" />
+    <Content Include="404.aspx" />
+    <Content Include="404.html" />
+    <Content Include="500.aspx" />
+    <Content Include="500.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\img\cloud0.png" />
@@ -205,25 +199,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\DataModels\PlaceWeatherModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PlaceWeatherModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DataModels\PlaceWeatherModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PlaceWeatherModel.edmx</DependentUpon>
-      <LastGenOutput>PlaceWeatherModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DataModels\PlaceWeatherModel.edmx.diagram">
-      <DependentUpon>PlaceWeatherModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\DataModels\PlaceWeatherModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PlaceWeatherModel.edmx</DependentUpon>
-      <LastGenOutput>PlaceWeatherModel.cs</LastGenOutput>
-      <CustomToolNamespace>WeatherApp.Models</CustomToolNamespace>
-    </Content>
     <Content Include="App_Data\smhi_response.json" />
+    <None Include="Properties\PublishProfiles\JohnnysProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -249,7 +226,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Place\Index.cshtml" />
-    <Content Include="Views\Shared\_FlashMessage.cshtml" />
     <Content Include="Views\Place\Create.cshtml" />
     <Content Include="Views\Place\_PlaceForm.cshtml" />
     <Content Include="Views\Place\Edit.cshtml" />
@@ -263,7 +239,6 @@
     <Content Include="Views\Shared\DisplayTemplates\DayForecast.cshtml" />
     <Content Include="Views\Weather\Get.cshtml" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -279,6 +254,12 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WeatherApp.Models\WeatherApp.Models.csproj">
+      <Project>{2d94ec01-0bf9-41bc-8c9b-e38dd271e6fa}</Project>
+      <Name>WeatherApp.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

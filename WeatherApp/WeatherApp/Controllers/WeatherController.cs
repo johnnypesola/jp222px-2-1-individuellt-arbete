@@ -71,6 +71,7 @@ namespace WeatherApp.Controllers
                 ViewBag.Message = e.Message;
                 return View("Error");
             }
+
             catch (Exception e)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
@@ -109,10 +110,12 @@ namespace WeatherApp.Controllers
                 ViewBag.Message = e.Message;
                 return View("Error");
             }
+                
             catch (Exception e)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
+                 
         }
     }
 }

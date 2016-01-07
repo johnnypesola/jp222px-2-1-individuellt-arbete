@@ -9,42 +9,45 @@
 <p>
     @Html.ActionLink("Skapa ny plats", "Create", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Latitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Longitude)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-
-        @foreach (var item in Model)
-        {
+<div class="col-md-8">
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>
-                    @item.Name
-                </td>
-                <td>
-                    @String.Format("{0:0.000000}", item.Latitude)
-                </td>
-                <td>
-                    @String.Format("{0:0.000000}", item.Longitude)
-                </td>
-                <td>
-                    @Html.ActionLink("Redigera", "Edit", new { id = item.PlaceId }, new { @class = "btn btn-warning btn-xs" })
-                    @Html.ActionLink("Radera", "Delete", new { id = item.PlaceId }, new { @class = "btn btn-danger btn-xs" })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Latitude)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Longitude)
+                </th>
+                <th></th>
             </tr>
-        }
+        </thead>
+        <tbody>
 
-    </tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @String.Format("{0:0.000000}", item.Latitude)
+                    </td>
+                    <td>
+                        @String.Format("{0:0.000000}", item.Longitude)
+                    </td>
+                    <td class="text-right">
+                        @Html.ActionLink("Redigera", "Edit", new { id = item.PlaceId }, new { @class = "btn btn-warning btn-xs" })
+                        @Html.ActionLink("Radera", "Delete", new { id = item.PlaceId }, new { @class = "btn btn-danger btn-xs" })
+                    </td>
+                </tr>
+            }
 
-</table>
+        </tbody>
+
+    </table>
+</div>
+

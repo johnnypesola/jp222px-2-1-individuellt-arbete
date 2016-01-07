@@ -6,7 +6,15 @@
         <h2>@ViewBag.Title</h2>
 
         <p class="alert alert-danger col-md-4">
-            @ViewBag.Message
+            @if (ViewBag.Message != null)
+            {
+                @ViewBag.Message
+            }
+            else
+            {
+                <span>Ett oväntat fel uppstod.</span>
+            }
+            
         </p>
     </div>
 

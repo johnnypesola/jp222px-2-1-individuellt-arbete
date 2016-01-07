@@ -1,6 +1,0 @@
-﻿@if (TempData["message"] != null)
-{
-    <div class="flash-message @(TempData["error"] != null ? new HtmlString("error") : new HtmlString(""))">
-        @TempData["message"]
-    </div>
-}
