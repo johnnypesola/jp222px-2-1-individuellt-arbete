@@ -27,12 +27,15 @@ namespace WeatherApp.Controllers
 
                 return View(places);
             }
-            catch (Exception)
+            // Something went wrong
+            catch (HandleableExeption e)
             {
-                TempData["message"] = "Ett oväntat fel uppstod när platser skulle hämtas";
-                TempData["error"] = true;
-
-                return View();
+                ViewBag.Message = e.Message;
+                return View("Error");
+            }
+            catch (Exception e)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
         }
 
@@ -62,12 +65,14 @@ namespace WeatherApp.Controllers
                     return View("Success", place);
                 }
                 // Something went wrong
-                catch (Exception)
+                catch (HandleableExeption e)
                 {
-                    TempData["message"] = "Ett oväntat fel uppstod när platsen skulle skapas";
-                    TempData["error"] = true;
-
-                    return View(place);
+                    ViewBag.Message = e.Message;
+                    return View("Error");
+                }
+                catch (Exception e)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
                 }
             }
 
@@ -86,15 +91,28 @@ namespace WeatherApp.Controllers
             // Valid request
             else
             {
-                Place place = _repository.GetPlace((int)id);
-
-                // If contact does not exist
-                if (place == null)
+                try
                 {
-                    return HttpNotFound();
-                }
+                    Place place = _repository.GetPlace((int)id);
 
-                return View(place);
+                    // If contact does not exist
+                    if (place == null)
+                    {
+                        return HttpNotFound();
+                    }
+
+                    return View(place);
+                }
+                // Something went wrong
+                catch (HandleableExeption e)
+                {
+                    ViewBag.Message = e.Message;
+                    return View("Error");
+                }
+                catch (Exception e)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                }
             }
         }
 
@@ -128,10 +146,14 @@ namespace WeatherApp.Controllers
                     return View("Success", place);
                 }
                 // Something went wrong
-                catch (Exception)
+                catch (HandleableExeption e)
                 {
-                    TempData["message"] = "Ett oväntat fel uppstod när platsen skulle tas bort.";
-                    TempData["error"] = true;
+                    ViewBag.Message = e.Message;
+                    return View("Error");
+                }
+                catch (Exception e)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
                 }
             }
 
@@ -162,12 +184,14 @@ namespace WeatherApp.Controllers
                     return View(place);
                 }
                 // Something went wrong
-                catch (Exception)
+                catch (HandleableExeption e)
                 {
-                    TempData["message"] = "Ett oväntat fel uppstod när platsen hämtades.";
-                    TempData["error"] = true;
-
-                    return RedirectToAction("Index");
+                    ViewBag.Message = e.Message;
+                    return View("Error");
+                }
+                catch (Exception e)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
                 }
             }
         }
@@ -203,12 +227,14 @@ namespace WeatherApp.Controllers
                 return View();
             }
             // Something went wrong
-            catch (Exception)
+            catch (HandleableExeption e)
             {
-                TempData["message"] = "Ett oväntat fel uppstod när platsen skulle sparas.";
-                TempData["error"] = true;
-
-                return RedirectToAction("Index");
+                ViewBag.Message = e.Message;
+                return View("Error");
+            }
+            catch (Exception e)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
         }
 

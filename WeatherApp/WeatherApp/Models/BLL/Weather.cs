@@ -58,7 +58,7 @@ namespace WeatherApp.Models
             [Display(Name = "Sannolikhet för åska")]
             [DisplayFormat(ConvertEmptyStringToNull = false)]
             [Required(ErrorMessage = "Var god ange Sannolikhet för åska.")]
-            [Range(0, 100, ErrorMessage = "Värdet för Molnmängd får max vara 100 och minst 0.")]
+            [Range(0, 100, ErrorMessage = "Värdet för Sannolikhet får max vara 100 och minst 0.")]
             public byte ThunderStormProbability { get; set; }
 
             [Display(Name = "Nederbörd")]

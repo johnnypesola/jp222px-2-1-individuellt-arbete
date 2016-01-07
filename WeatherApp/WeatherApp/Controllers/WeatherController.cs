@@ -27,9 +27,21 @@ namespace WeatherApp.Controllers
         {
             IEnumerable<Place> places;
 
-            places = _placeWeatherService.GetPlaces();
+            try
+            {
+                places = _placeWeatherService.GetPlaces();
 
-            return View(places);
+                return View(places);
+            }
+            catch (HandleableExeption e)
+            {
+                ViewBag.Message = e.Message;
+                return View("Error");
+            }
+            catch (Exception e)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
         }
 
         public ActionResult Get(int placeId)
@@ -71,23 +83,36 @@ namespace WeatherApp.Controllers
             // Declare vars
             IEnumerable<Weather> weatherForPlace;
             string placeName;
-            DateTime dateToGetFor = DateTime.Parse(String.Format("{0:0000}-{1:00}-{2:00}", year, month, day));
 
-            // Get weather for place
-            weatherForPlace = _placeWeatherService.GetDateWeatherForPlace(placeId, out placeName, dateToGetFor);
-
-            // If no place was found.
-            if (weatherForPlace == null && placeName == "Not found")
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+                DateTime dateToGetFor = DateTime.Parse(String.Format("{0:0000}-{1:00}-{2:00}", year, month, day));
+
+                // Get weather for place
+                weatherForPlace = _placeWeatherService.GetDateWeatherForPlace(placeId, out placeName, dateToGetFor);
+
+                // If no place was found.
+                if (weatherForPlace == null && placeName == "Not found")
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+                }
+
+                // Set place info
+                ViewBag.PlaceName = placeName;
+                ViewBag.Date = dateToGetFor;
+                ViewBag.PlaceId = placeId;
+
+                return View(weatherForPlace);
             }
-
-            // Set place info
-            ViewBag.PlaceName = placeName;
-            ViewBag.Date = dateToGetFor;
-            ViewBag.PlaceId = placeId;
-
-            return View(weatherForPlace);
+            catch (HandleableExeption e)
+            {
+                ViewBag.Message = e.Message;
+                return View("Error");
+            }
+            catch (Exception e)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
         }
     }
 }

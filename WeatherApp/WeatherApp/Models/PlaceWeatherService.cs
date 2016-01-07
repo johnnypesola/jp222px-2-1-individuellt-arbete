@@ -6,11 +6,14 @@ using WeatherApp.Models.WebServices;
 
 namespace WeatherApp.Models
 {
-    public class PlaceWeatherService : IPlaceWeatherService
+    public class PlaceWeatherService : IPlaceWeatherService, IDisposable
     {
+        // Fields
         private const int WEATHER_DATA_REFRESH_HOURS = 2;
         private readonly ISmhiWebService _webService;
         private readonly IPlaceWeatherRepository _repository;
+
+        bool isDisposed = false; // Flag: Has Dispose already been called?
 
         // Constructor for injecting repositories and services (makes testing easier). Handled in unityconfig
         public PlaceWeatherService(ISmhiWebService webService, IPlaceWeatherRepository placeWeatherRepository)
@@ -116,6 +119,28 @@ namespace WeatherApp.Models
             }
 
             return weatherList;
+        }
+
+        // Public implementation of Dispose pattern.
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        // Private implementation of Dispose pattern.
+        protected virtual void Dispose(bool shouldDispose)
+        {
+            if (!isDisposed)
+            {
+                if (shouldDispose)
+                {
+                    // Free any other managed objects.
+                    _repository.Dispose();
+                }
+
+                isDisposed = true;
+            }
         }
     }
 }

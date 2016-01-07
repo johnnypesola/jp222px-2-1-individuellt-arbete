@@ -82,7 +82,7 @@ namespace WeatherApp.Models
                 PrecipitationIntensity = HourWeatherList.Average(w => w.PrecipitationIntensity),
 
                 // Get the most ocurring weather type
-                Precipitation = HourWeatherList.GroupBy(w => w).OrderByDescending(grp => grp.Count()).Select(grp => grp.Key).First().Precipitation,
+                Precipitation = HourWeatherList.GroupBy(w => w.Precipitation).OrderByDescending(grp => grp.Count()).Select(grp => grp.Key).First(),
 
                 // Other good to have values
                 PlaceId = PlaceId,

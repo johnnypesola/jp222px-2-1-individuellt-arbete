@@ -122,3 +122,9 @@ textarea {
 .table .precipitation, .table .cloud {
     width: 50px;
 }
+
+.city-element {
+    float: left;
+    display: block;
+    margin: 10px;
+}
